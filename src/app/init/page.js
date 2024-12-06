@@ -12,6 +12,7 @@ import QRCodeIcon from '../svgs/QR.svg';
 import qrgen from '../Images/qrgen.png';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import PoweredByPFRaast from '../svgs/poweredby.svg';
 
 
 const PaymentInitilization = () => {
@@ -150,10 +151,11 @@ const PaymentInitilization = () => {
                             <div className={`overflow-hidden transition-all  duration-500 ease-in-out ${expanded === 0 ? 'max-h-96' : 'max-h-0'}`}>
 
                                 <div className="flex justify-end">
-                                    <div className="button">
+                               
+                                    <div className="buttonbutton flex flex-col sm:flex-row justify-end items-end pr-5 w-full ">
                                         <button 
                                         onClick={CardPayNowOnClick}
-                                        className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-10 py-2 mx-10 my-3" >Pay Now</button>
+                                        className="content-white bg-btnBlue border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 xsize:text-sm xsize:px-2 xsize:py-1" >Pay Now</button>
                                     </div>
 
                                 </div>
@@ -182,19 +184,22 @@ const PaymentInitilization = () => {
 
                             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded === 1 ? 'max-h-96' : 'max-h-0'}`}>
 
-                                <div className="ml-5 flex justify-between">
-                                    <div className="cursor-pointer flex justify-between" >
+                                <div className="ml-5 flex w-full px-2 xsize:px-0">
+                                    <div className="cursor-pointer flex" >
 
-                                        <div className="pl-4 flex justify-between">
-                                            <Image src={qrgen} alt="qrgen" className=" w-40" />
+                                        <div className="flex flex-col w-full justify-between items-center">
+                                            <Image src={qrgen} alt="qrgen" className="w-40 h-30" />
                                         </div>
 
                                     </div>
-
-                                    <div className="button flex items-center">
-                                        <button className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 mx-10 my-3" >
-                                            Save To Gallery</button>
+                                   
+                                    <div className="button flex flex-col sm:flex-row justify-between items-end pr-5 w-full">
+                                    <Image src={PoweredByPFRaast} alt="My Icon" className="items-start py-5" />
+                                    <button className="content-white bg-btnBlue border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 xsize:text-sm xsize:px-2 xsize:py-1">
+                                        Save To Gallery
+                                    </button>
                                     </div>
+
 
                                 </div>
                             </div>
