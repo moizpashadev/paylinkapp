@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
- import InfoIcon from '../svgs/info.svg';
+ import InfoIcon from '../components/svgs/info.svg';
 
 const InfoArea = ({Text}) => {
   return (
-    <div style={{ backgroundColor: '#D2EAFF' }}   className="  flex items-center border rounded-lg ml-5 mr-5">
+    <div style={{ backgroundColor: '#f7f9fb' }}   className="  flex items-center border rounded-lg ml-5 mr-5">
       {/* <div className="content flex items-center py-2 justify-center">
         <Image src={InfoIcon} alt="My Icon" className="w-20 h-8"  />
         <span className=" text-xs">

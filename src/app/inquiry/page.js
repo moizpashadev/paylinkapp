@@ -6,13 +6,14 @@ import { Suspense } from 'react';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import Image from 'next/image';
-import CreditCardIcon from '../svgs/CreditCard.svg';
-import IntMobBankingIcon from '../svgs/intMbanking.svg';
-import QRCodeIcon from '../svgs/QR.svg';
-import qrgen from '../Images/qrgen.png';
+import CreditCardIcon from '../components/svgs/CreditCard.svg';
+import IntMobBankingIcon from '../components/svgs/intMbanking.svg';
+import QRCodeIcon from '../components/svgs/QR.svg';
+import qrgen from '../components/Images/qrgen.png';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import PoweredByPFRaast from '../svgs/poweredby.svg';
+import PoweredByPFRaast from '../components/svgs/poweredby.svg';
+import logo from '../components/Images/nestlelogo.avif';
 
 
 const PaymentInitilization = () => {
@@ -22,11 +23,12 @@ const PaymentInitilization = () => {
         setExpanded(expanded === index ? null : index); // Toggle between expand and collapse
     };
     const [data, setData] = useState(null);
-    const [apiResponse, setApiResponse] = useState(null);
     const searchParams = useSearchParams();
     const router = useRouter();
     const [voucherData, setVoucherData] = useState(null);
     const [institutionData, setInstitutionData] = useState(null);
+    const { encryptData } = require("../utils/encryptionUtils");
+    const { decryptData } = require("../utils/decryptUtils");
 
     useEffect(() => {
         const encryptedData = searchParams.get('data');
@@ -36,10 +38,7 @@ const PaymentInitilization = () => {
                 const bytes = CryptoJS.AES.decrypt(encryptedData, 'your-secret-key'); // Use the same key
                 const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
                 setData(decryptedData);
-
-                //console.log('Decrypted Data:', decryptedData);
-
-                // Call the API with decrypted data
+                
                 fetchBill(decryptedData);
             } catch (error) {
                 //console.error('Error decrypting data:', error);
@@ -51,13 +50,7 @@ const PaymentInitilization = () => {
             router.push('/'); // Redirect to the home page
         }
     }, [searchParams]);
-
-    const CardPayNowOnClick = () =>
-            {
-                router.push(`/cardinfo`);
-     
-
-            }   
+    
     const fetchBill = async (decryptedData) => {
         try {
 
@@ -78,15 +71,18 @@ const PaymentInitilization = () => {
 
                 setVoucherData(response.data.voucherData);
                 setInstitutionData(response.data.institution);
-
-
+                //console.log(response.data.institution);
+                console.log(response.data.voucherData);
+                const dataBus = { 
+                  Institution: response.data.institution, 
+                  voucherData: response.data.voucherData,
+                  kuickpayID:kuickpayID
+                 };
+                sessionStorage.setItem('dataBus', encryptData(JSON.stringify(dataBus)));
 
                 // Check if due_date exists and is valid, then format it
                 if (response.data.voucherData.due_Date && !isNaN(new Date(response.data.voucherData.due_Date))) {
-
-
-
-                    // Format the date directly inside voucherData
+            // Format the date directly inside voucherData
                     response.data.voucherData.due_Date = new Intl.DateTimeFormat('en-GB', {
                         day: '2-digit',
                         month: 'short',
@@ -97,29 +93,34 @@ const PaymentInitilization = () => {
                     response.data.voucherData.due_Date = 'N/A';
                 }
 
-
-                console.log('Voucher Data:', response.data.voucherData);
-                console.log('Institution Data:', response.data.institution);
             }
             else {
                 console.log('Response code:', response.data.response_code);
             }
 
-            setApiResponse(response.data);
-            console.log('API Response:', response.data.voucherData.due_Date);
         } catch (error) {
             console.error('Error fetching API ----data:', error);
         }
     };
 
+    const CardPayNowOnClick = () =>
+      {
+
+          router.push(`/cardinfo`);
 
 
+      } 
+      
+      const HandleHowtoPay = () => {
+        window.location.href = 'https://app2.kuickpay.com/PaymentsBillPayment';
+      };
+      
     return (
         
         <div className="p-1 flex flex-col min-h-screen relative z-10" >
             {/* Logo Section */}
 
-            <Header Heading={"PAYMENT LINK"} />
+            <Header Heading={"PAYMENT LINK"}  logo={logo}/>
             <main className="flex-grow ">
             {voucherData && institutionData ? (
                 <div className="flex flex-col md:flex-row gap-6 p-4 md:p-6 lg:p-8 relative">
@@ -232,7 +233,7 @@ const PaymentInitilization = () => {
                                     <div className="button">
 
 
-                                        <button className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y
+                                        <button onClick={HandleHowtoPay} className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y
                          hover:border-black text-white px-10 py-2 mx-10 my-3" >See How to Pay</button>
 
 

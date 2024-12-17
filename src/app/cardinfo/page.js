@@ -1,22 +1,25 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // For navigation
 import Header from '../components/header';
 import Footer from '../components/footer';
 import InfoArea from '../components/InfoArea';
 import Textbox from '../components/textbox';
-import SearchIcon from '../svgs/cardinfo/search.svg';
-import calendar from '../svgs/cardinfo/calendar.svg';
+import logo from '../components/Images/nestlelogo.avif';
+import CryptoJS from 'crypto-js';
+import SearchIcon from '../components/svgs/cardinfo/search.svg';
+import calendar from '../components/svgs/cardinfo/calendar.svg';
 
-import card from '../svgs/cardinfo/cc.svg';
+import card from '../components/svgs/cardinfo/cc.svg';
 
-import lock from '../svgs/cardinfo/Vector.svg';
+import lock from '../components/svgs/cardinfo/Vector.svg';
 import { Caladea } from 'next/font/google';
 
 const CardInfo = () => {
   const router = useRouter();
-
+  const { encryptData } = require("../utils/encryptionUtils");
+  const { decryptData } = require("../utils/decryptUtils");
   const [cardNumber, setCardNumber] = useState('');
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
@@ -118,21 +121,37 @@ const CardInfo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert('Payment details are valid!');
-    }
+  
+      const formData = {
+        cardNumber: cardNumber,       // Assuming cardNumber is managed in state
+        expiryMonth: expiryMonth,     // Assuming expiryMonth is managed in state
+        expiryYear: expiryYear,       // Assuming expiryYear is managed in state
+        cvv: cvv,                     // Assuming cvv is managed in state
+      };
+  
+  if (validateForm()) {
+sessionStorage.setItem("localstored", encryptData(formData));
+
+const getSessionvalue = sessionStorage.getItem("localstored");
+
+    router.replace(`/confirm`);
+  }
   };
+
+
+  
 
   return (
     <div className="p-1 flex flex-col min-h-screen z-10">
-      <Header Heading={'PAYMENT LINK'} />
+      
+      <Header Heading={'PAYMENT LINK'} logo={logo} />
 
       <div className="flex items-center justify-center pt-5 sm:ml-5 sm:mr-5">
         <InfoArea Text="Please Confirm with the bank if the card is enabled for online transactions." />
       </div>
 
       <main className="flex items-center justify-center pt-5 sm:ml-5 sm:mr-5">
-        <div className="lg:w-5/12  sm:p-2 sm:py-2 sm:ml-5 sm:mr-5 md:p-4 md:py-4 lg:p-5 lg:py-5">
+        <div className="lg:w-4/12  md:shadow-custom-shadow sm:p-2 sm:py-2 sm:ml-5 sm:mr-5 md:p-4 md:py-4 lg:p-5 lg:py-5">
           <form onSubmit={handleSubmit} className="p-3 ">
 
             {/* Card Number */}
@@ -226,8 +245,8 @@ const CardInfo = () => {
           
             {/* Submit Button */}
             <div className="flex items-center  w-full py-2 mt-10">
-            <button className="btn" >
-              Fetch Bill
+            <button className="button-style" >
+              Continue
             </button>
           </div>
           </form>

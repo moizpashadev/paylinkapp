@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import SearchIcon from '../svgs/cardinfo/search.svg';
+import SearchIcon from '../components/svgs/cardinfo/search.svg';
 
 const SearchableTextbox = ({
   placeholder,

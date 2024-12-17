@@ -7,9 +7,10 @@ import Footer from './components/footer';
 import SearchableTextbox from './components/SearchableTextbox';
 import Textbox from './components/textbox';
 import InfoArea from './components/InfoArea';
-import SearchIcon from './svgs/cardinfo/search.svg';
+import SearchIcon from './components/svgs/cardinfo/search.svg';
 import CryptoJS from 'crypto-js';
 import './globals.css';
+import logo from './components/Images/nestlelogo.avif';
 
 
 
@@ -95,7 +96,7 @@ const PaymentLink = () => {
           'your-secret-key'  //process.env.SECRET_KEY // Use an environment variable for the secret key in production
         ).toString();
   
-        router.push(`/init?data=${encodeURIComponent(encryptedData)}`);
+        router.push(`/inquiry?data=${encodeURIComponent(encryptedData)}`);
      
         
     } else {
@@ -107,7 +108,7 @@ const PaymentLink = () => {
 
   return (
     <div className="p-1 flex flex-col min-h-screen z-10">
-      <Header Heading={"PAYMENT LINK"} />
+      <Header Heading={"PAYMENT LINK"} logo={logo} />
 
       <main className="flex items-center justify-center pt-5 sm:ml-5 sm:mr-5">
         <div className="lg:w-5/12 py-3 ml-5 mr-5 sm:p-2 sm:py-2 sm:ml-5 sm:mr-5 md:p-4 md:py-4 lg:p-5 lg:py-5">
@@ -171,7 +172,7 @@ const PaymentLink = () => {
           <InfoArea Text="Search Kuickpay ID or Consumer ID Number on your Bill/Invoice" />
 
           <div className="flex items-center  w-full py-2 mt-10">
-            <button className="px-4 py-2 w-full bg-btnBlue rounded-[5px] active:shadow-custom-shadow  text-white" onClick={handleFetchBill}>
+            <button className="button-style" onClick={handleFetchBill}>
               Fetch Bill
             </button>
           </div>
