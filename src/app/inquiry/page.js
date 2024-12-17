@@ -233,7 +233,7 @@ const PaymentInitilization = () => {
                                     <div className="button">
 
 
-                                        <button onClick={HandleHowtoPaynn} className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y
+                                        <button onClick={HandleHowtoPay} className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y
                          hover:border-black text-white px-10 py-2 mx-10 my-3" >See How to Pay</button>
 
 
