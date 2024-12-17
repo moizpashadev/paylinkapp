@@ -9,6 +9,7 @@ import Image from 'next/image';
 import CreditCardIcon from '../components/svgs/CreditCard.svg';
 import IntMobBankingIcon from '../components/svgs/intMbanking.svg';
 import QRCodeIcon from '../components/svgs/QR.svg';
+import copyicon from '../components/svgs/copy.svg';
 import qrgen from '../components/Images/qrgen.png';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -196,7 +197,7 @@ const PaymentInitilization = () => {
                                    
                                     <div className="button flex flex-col sm:flex-row justify-between items-end pr-5 w-full">
                                     <Image src={PoweredByPFRaast} alt="My Icon" className="items-start py-5" />
-                                    <button className="content-white bg-btnBlue border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 xsize:text-sm xsize:px-2 xsize:py-1">
+                                    <button className="content-white bg-btnBlue border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 xsize:text-sm xsize:px-2 xsize:py-1" >
                                         Save To Gallery
                                     </button>
                                     </div>
@@ -228,16 +229,44 @@ const PaymentInitilization = () => {
                             </div>
 
                             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded === 2 ? 'max-h-96' : 'max-h-0'}`}>
+                                <div className='content ml-10 md:text-sm xsize:text-xs'>
 
+                               <div>
+  <strong>Mobile Banking:</strong>
+  <ol className="list-decimal pl-5 mt-2 space-y-1">
+    <li>Login to your Bank Mobile App</li>
+    <li>Select Bill Payment</li>
+    <li>
+      Select <strong>KuickPay</strong>
+    </li>
+    <li className="flex flex-wrap items-center gap-1 sm:gap-2">
+  <span className="whitespace-nowrap">Enter Consumer ID:</span>
+  <span className="ml-1 font-semibold">{data.kuickpayID}</span>
+  <button
+    onClick={() => navigator.clipboard.writeText(data.kuickpayID)}
+    className="mx-1 sm:mx-1 w-5 h-5 flex justify-center items-center text-gray-600 hover:text-blue-500 active:scale-150 transition-all duration-550"
+  >
+    <Image src={copyicon} alt="Copy Icon" className="w-4 h-4" />
+  </button>
+  <span className="whitespace-nowrap">and Submit</span>
+</li>
+    <li>Confirm details and Pay</li>
+  </ol>
+</div>
+
+
+                                </div>
                                 <div className="flex justify-end">
-                                    <div className="button">
-
-
-                                        <button onClick={HandleHowtoPay} className="content-white bg-btnBlue  border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y
-                         hover:border-black text-white px-10 py-2 mx-10 my-3" >See How to Pay</button>
-
-
+                                <div className="buttonbutton flex flex-col sm:flex-row justify-end items-end pr-5 w-full ">
+                                
+                                                                  
+                                        
+                                       <button 
+                                        onClick={HandleHowtoPay}
+                                        className="content-white bg-btnBlue border-bg-btnblue border-x border-y rounded hover:text-slate-950 hover:bg-transparent hover:border-x hover:border-y hover:border-black text-white px-5 py-2 xsize:text-sm xsize:px-2 xsize:py-1" >
+                                           See How to Pay</button>
                                     </div>
+                                    
 
                                 </div>
                             </div>
