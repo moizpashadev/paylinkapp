@@ -166,7 +166,7 @@ const PaymentForm = () => {
     <div className="p-1 flex flex-col min-h-screen z-10">
       <Header Heading={'Nestlé Pure Life - Payments'} logo={logo} />
 
-      <main className="flex flex-col items-center justify-center pt-5 sm:ml-5 sm:mr-5">
+      <main className="flex flex-col items-center justify-center pt-5 px-5 sm:ml-5 sm:mr-5">
         {/* Customer ID Input and Fetch Button */}
         <div className="w-full max-w-md p-4 bg-white shadow-md rounded-md">
           <label htmlFor="customerID" className="block mb-2 font-medium">
@@ -183,7 +183,7 @@ const PaymentForm = () => {
             />
             <button
               onClick={handleFetchDetails}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="xsize:text-xs bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600"
             >
               {isLoading ? 'Fetching...' : 'Fetch Details'}
             </button>
