@@ -1,5 +1,5 @@
 import Image from 'next/image'; 
-import bg from '../Images/bg.png'; 
+//import bg from '../Images/bg.png'; 
 
 export default function LandingPage() {
   return (
@@ -35,7 +35,7 @@ export default function LandingPage() {
             </div>
             <div className="flex w-4/12">
                 
-                <Image src={bg} alt="Logo" className="" />
+                {/* <Image src={bg} alt="Logo" className="" /> */}
             </div>
            
             
