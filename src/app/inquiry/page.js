@@ -153,19 +153,20 @@ const PaymentInitilization = () => {
                 setInquiryStatus(true)
                 setVoucherData(response.data.voucherData);
                 setInstitutionData(response.data.institution);
-                console.log(response.data.institution);
-                console.log(response.data.voucherData);
+                // console.log(response.data.institution);
+                // console.log(response.data.voucherData);
                 const token =sessionStorage.getItem('authToken');
                 //QR Generation //
                 const sessionQRstring =sessionStorage.getItem('QRstring');
                
-                if(sessionQRstring === ""){
+                if(sessionQRstring === null){
                  
                 generateQRCode(token, institutionID, kuickpayID, response.data.voucherData.billAmount);
                 //QR Generation //
                 }
                 else{
-                  console.log("exist");
+                  // console.log("exist");
+                  // console.log(sessionQRstring);
                   setQRString(sessionQRstring);
                   setIsQrLoading(false)
                 }
