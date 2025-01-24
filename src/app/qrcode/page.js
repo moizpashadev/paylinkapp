@@ -60,8 +60,7 @@ const QRCodeWithDownload = () => {
         {/* QR Code */}
        <div className='flex justify-center' >
        
-       <div
-      style={{ padding: '10px', display: 'inline-block', backgroundImage: `url(${bgQRCode.src})`, backgroundSize: 'cover', backgroundPosition: 'center', }}>
+       <div style={{ padding: '10px', display: 'inline-block', backgroundImage: `url(${bgQRCode.src})`, backgroundSize: 'cover', backgroundPosition: 'center', }}>
          <Canvas
           text="https://example.com"
           options={{

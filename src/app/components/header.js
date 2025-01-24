@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import whatsapp from '../components/Images/whatsappicon.png';
+import whatsapp from '../components/Images/whatsappIcon.png';
 
 
 

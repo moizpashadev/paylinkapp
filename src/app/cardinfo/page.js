@@ -141,14 +141,9 @@ const getSessionvalue = sessionStorage.getItem("localstored");
 
 
     useEffect(() => {
-      
+        
       const GetDatafromInquiry = sessionStorage.getItem('dataBus');
-      if (!GetDatafromInquiry) {
-        router.replace('/'); // Redirect to login if session data is missing
-        return;
-      } 
-      
-      if (GetDatafromInquiry) {
+        if (GetDatafromInquiry) {
           const decryptedData = decryptData(sessionStorage.getItem('dataBus'));
           console.log(decryptedData);
           if (decryptedData) {
