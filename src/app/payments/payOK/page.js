@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState,useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { decryptText } from '@/app/utils/decryptText';
 import { createAxiosInstance } from '@/app/constants/axiosInstance';
 import { API_URLS } from '@/app/constants/config';
@@ -13,7 +14,7 @@ import html2canvas from 'html2canvas';
 
 
 
-export default function PayOK() {
+const  PayOK= () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [processedData, setProcessedData] = useState(null);
@@ -261,35 +262,71 @@ const backtoHome = async () =>{
           ) : (
             <div>
               {/* Page load skeleton here */}
+              <>
+  {/* Heading */}
+  <div className="flex justify-center items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-48 h-6"></div>
+  </div>
 
-              <div>
-              {/* Loading State */}
-              <div className="flex justify-between items-center">
-                <h2 className="heading tracking-widest text-xl lg:text-xl md:text-md xsize:text-md">
-                  Confirmation
-                </h2>
-              </div>
-              <div className="border-t mt-2"></div>
-              <div className="animate-pulse">
-                <div className="px-2 pt-4 flex justify-between items-center">
-                  <p className="InvSumContent bg-gray-300 h-4 w-24 rounded"></p>
-                  <p className="InvSumContentweight bg-gray-300 h-4 w-20 rounded"></p>
-                </div>
-                <div className="px-2 pt-2 flex justify-between items-center">
-                  <p className="InvSumContent bg-gray-300 h-4 w-24 rounded"></p>
-                  <p className="InvSumContentweight bg-gray-300 h-4 w-20 rounded"></p>
-                </div>
-                <div className="border-t mt-5"></div>
-                <p className="px-2 pt-2 bg-gray-300 h-4 w-48 rounded"></p>
-                <div className="px-2 pt-5 flex justify-between items-center">
-                  <p className="text-lg font-light bg-gray-300 h-4 w-24 rounded"></p>
-                  <p className="font-medium text-lg bg-gray-300 h-4 w-20 rounded"></p>
-                </div>
-                <div className="flex items-center w-full py-2 mt-10">
-                  <div className="button-style bg-gray-300 h-8 w-32 rounded"></div>
-                </div>
-              </div>
-            </div>
+  {/* Border */}
+  <div className="border-t mt-2"></div>
+
+  {/* Subtext */}
+  <div className="px-2 pt-2 flex text-sm justify-center items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-40 h-4"></div>
+  </div>
+
+  {/* Bill Amount */}
+  <div className="px-2 pt-2 flex text-xl justify-center items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-36 h-6"></div>
+  </div>
+
+  {/* "To" Text */}
+  <div className="px-2 pt-2 flex text-sm justify-center items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-12 h-4"></div>
+  </div>
+
+  {/* Institution Name */}
+  <div className="px-2 pt-2 flex text-xl justify-center items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-44 h-6"></div>
+  </div>
+
+  <br />
+
+  {/* Consumer Number */}
+  <div className="px-2 pt-4 flex justify-between items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-32 h-4"></div>
+    <div className="bg-gray-300 rounded w-28 h-4"></div>
+  </div>
+
+  {/* Consumer Details */}
+  <div className="px-2 pt-2 flex justify-between items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-32 h-4"></div>
+    <div className="bg-gray-300 rounded w-36 h-4"></div>
+  </div>
+
+  {/* Payment Date */}
+  <div className="px-2 pt-2 flex justify-between items-center animate-pulse">
+    <div className="bg-gray-300 rounded w-32 h-4"></div>
+    <div className="bg-gray-300 rounded w-36 h-4"></div>
+  </div>
+
+  {/* Close Button */}
+  <div className="flex items-center w-full py-2 mt-10 relative animate-pulse">
+    <div className="bg-gray-300 rounded w-24 h-8"></div>
+  </div>
+
+  {/* Save & Share Button */}
+  <div className="flex items-center w-full py-2 relative animate-pulse">
+    <div className="bg-gray-300 rounded w-32 h-8"></div>
+  </div>
+
+  {/* Download App Button */}
+  <div className="flex items-center w-full py-2 relative animate-pulse">
+    <div className="bg-gray-300 rounded w-44 h-8"></div>
+  </div>
+</>
+
             </div>
           )}
         </div>
@@ -338,3 +375,99 @@ const backtoHome = async () =>{
     // </div>
   );
 };
+
+const aymentInitilizationWithSuspense = () => {
+    return (
+      <Suspense fallback={
+        <div className="flex flex-col md:flex-row gap-6 p-4 md:p-6 lg:p-8 relative">
+  
+  <div className="w-full py-3 md:w-6/12 order-2 md:order-1 animate-pulse">
+    <h2 className="ml-10 content tracking-widest text-xl lg:text-lg md:text-sm xsize:text-md h-2 bg-customPulseColor rounded w-40 mb-4"></h2>
+    <div className="xsize:mr-10">
+    
+      <div className="flex items-center mb-4">
+        <div className="cursor-pointer p-4 flex justify-between items-center">
+          <div className="content flex items-center">
+            <div className="w-20 h-8 bg-customPulseColor rounded"></div>
+            <span className="p-4 text-sm h-2 bg-customPulseColor rounded w-32"></span>
+          </div>
+        </div>
+        <div className="content transform transition-transform ml-auto h-2 bg-customPulseColor rounded w-8"></div>
+      </div>
+     
+      <div className="border-t my-2"></div>
+
+      
+      <div className="flex items-center mb-4">
+        <div className="cursor-pointer p-4 flex justify-between items-center">
+          <div className="content flex items-center">
+            <div className="w-20 h-8 bg-customPulseColor rounded"></div>
+            <span className="p-4 text-sm h-2 bg-customPulseColor rounded w-32"></span>
+          </div>
+        </div>
+        <div className="content transform transition-transform ml-auto h-2 bg-customPulseColor rounded w-8"></div>
+      </div>
+     
+
+      
+      <div className="border-t my-2"></div>
+      <div className="flex items-center mb-4">
+        <div className="cursor-pointer p-4 flex justify-between items-center">
+          <div className="content flex items-center">
+            <div className="w-20 h-8 bg-customPulseColor rounded"></div>
+            <span className="p-4 text-sm h-2 bg-customPulseColor rounded w-32"></span>
+          </div>
+        </div>
+        <div className="content transform transition-transform ml-auto h-2 bg-customPulseColor rounded w-8"></div>
+      </div>
+     
+    </div>
+  </div>
+
+ 
+  <div className="w-full max-h-80 md:w-6/12 order-1 md:order-2 mr-1 sm:mr-4 md:mr-8 lg:mr-6 flex justify-center animate-pulse">
+    <div className="px-4 py-3 rounded lg:border md:border xs:border-none border-gray-300 xsize:w-full sm:w-full lg:w-10/12">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="heading tracking-widest text-xl lg:text-lg md:text-sm xsize:text-md h-2 bg-customPulseColor rounded w-40 mb-4"></h2>
+        <button className="content border-bg-btnblue border-x border-y  px-3 py-1 w-auto text-xl lg:text-md md:text-sm xsize:text-xs hover:bg-btnBlue hover:text-white h-8 bg-customPulseColor rounded"></button>
+      </div>
+
+      <div className="border-t mt-5"></div>
+
+      <div className="px-2 pt-2 flex text-xl justify-center items-center">
+        <p className="xl:text-2xl lg:text-1xl md:text-lg sm:text-sm xs-text-xs h-2 bg-customPulseColor rounded w-40 mb-4"></p>
+      </div>
+      <div className="px-2 pt-4 flex justify-between items-center">
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+      </div>
+      <div className="px-2 pt-2 flex justify-between items-center">
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+      </div>
+      <div className="px-2 pt-2 flex justify-between items-center">
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+        <p className="InvSumContent h-2 bg-customPulseColor rounded w-32"></p>
+      </div>
+
+      <div className="border-t mt-5"></div>
+
+      
+      <div className="px-2 pt-5 flex justify-between items-center">
+        <p className="text-lg h-2 bg-customPulseColor rounded w-32"></p>
+        <p className="text-lg h-2 bg-customPulseColor rounded w-32"></p>
+      </div>
+      <div className="xsmsize:border-t mt-5"></div>
+    </div>
+  </div>
+</div>
+        
+        
+        
+        }>
+        <PayOK />
+      </Suspense>
+    );
+  };
+
+export default aymentInitilizationWithSuspense;

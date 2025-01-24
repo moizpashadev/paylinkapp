@@ -13,11 +13,17 @@ const ProcessHTML = () => {
   const formContainerRef = useRef(null);
   const iframeRef = useRef(null);
   const [iframeUrl, setIframeUrl] = useState(null);
-  const [htmlContent, setHtmlContent] = useState(null);
-
-  const content = sessionStorage.getItem("htmlContent");
+  const [content, setHtmlContent] = useState(null);
+  
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Access sessionStorage here
+      const content1 = sessionStorage.getItem('htmlContent');
+      setHtmlContent(content1);
+
+    
+
     // Retrieve content from sessionStorage
     // console.log("Content from sessionStorage:", content); // Log the content
 
@@ -30,7 +36,7 @@ const ProcessHTML = () => {
     } else {
       const newWindow = window.open("", "_self");
       setTimeout(() => {
-        sessionStorage.removeItem("transactionPost");
+        //sessionStorage.removeItem("transactionPost");
         // document.body.innerHTML = htmlContent;
         // handleFormSubmit();
         if (newWindow && newWindow.document) {
@@ -39,6 +45,7 @@ const ProcessHTML = () => {
         }
       }, 1000);
     }
+  }
   }, []);
 
 
