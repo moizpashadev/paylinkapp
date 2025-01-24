@@ -14,6 +14,7 @@ import calendar from '../components/svgs/cardinfo/calendar.svg';
 import card from '../components/svgs/cardinfo/cc.svg';
 
 import lock from '../components/svgs/cardinfo/Vector.svg';
+import EncryptionUtils from "../utils/encryptionUtils";
 
 const CardInfo = () => {
   const router = useRouter();
@@ -144,8 +145,9 @@ const getSessionvalue = sessionStorage.getItem("localstored");
         
       const GetDatafromInquiry = sessionStorage.getItem('dataBus');
         if (GetDatafromInquiry) {
-          const decryptedData = decryptData(sessionStorage.getItem('dataBus'));
-          console.log(decryptedData);
+          
+          const decryptedData = JSON.parse(EncryptionUtils.decryptText(GetDatafromInquiry));
+         
           if (decryptedData) {
             
             if(decryptedData.whitelabledLogo !== ""){

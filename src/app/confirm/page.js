@@ -35,7 +35,7 @@ const [whiteLabledLogo, setwhiteLabledLogo] = useState(null);
       try {
         const GetDatafromInquiry = sessionStorage.getItem('dataBus');
         if (GetDatafromInquiry) {
-          const decryptedData = decryptData(sessionStorage.getItem('dataBus'));
+          const decryptedData = JSON.parse(EncryptionUtils.decryptText(sessionStorage.getItem('dataBus')));
           console.log(decryptedData);
           if (decryptedData) {
             setData({

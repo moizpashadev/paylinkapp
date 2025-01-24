@@ -23,10 +23,6 @@ import html2canvas from 'html2canvas';
 import EncryptionUtils from "../utils/encryptionUtils";
 
 
-
-
-
-
 const PaymentInitilization = () => {
 
     const [expanded, setExpanded] = useState(null); // State to track which payment method is expanded
@@ -161,10 +157,18 @@ const PaymentInitilization = () => {
                 console.log(response.data.voucherData);
                 const token =sessionStorage.getItem('authToken');
                 //QR Generation //
-                
+                const sessionQRstring =sessionStorage.getItem('QRstring');
+               
+                if(sessionQRstring === ""){
+                 
                 generateQRCode(token, institutionID, kuickpayID, response.data.voucherData.billAmount);
                 //QR Generation //
-                
+                }
+                else{
+                  console.log("exist");
+                  setQRString(sessionQRstring);
+                  setIsQrLoading(false)
+                }
                 if (response.data.institution.checkoutLogo !== '') {
                   
                   setIsWhilteLabled(true);
@@ -184,10 +188,16 @@ const PaymentInitilization = () => {
 
                  };
 
-                 console.log("dataBus >>>>");
-                 console.log(dataBus);
-                 console.log("dataBus >>>>");
-                sessionStorage.setItem('dataBus', encryptData(JSON.stringify(dataBus)));
+                
+                sessionStorage.setItem('dataBus', EncryptionUtils.encryptText(JSON.stringify(
+                  { 
+                    Institution: response.data.institution, 
+                    voucherData: response.data.voucherData,
+                    kuickpayID:kuickpayID,
+                    whitelabledLogo:response.data.institution.checkoutLogo
+  
+                   }
+                )));
                 //console.log(response.data.institution.checkoutLogo);
                
                 // Check if due_date exists and is valid, then format it
@@ -269,6 +279,7 @@ const PaymentInitilization = () => {
               if (response.data.response_Code === '00') {
                  
                   setQRString(response.data.qrString);
+                  sessionStorage.setItem('QRstring',response.data.qrString)
                   setIsQrLoading(false)
               } else {
                   console.error('Error:', json.message);
@@ -298,8 +309,6 @@ const PaymentInitilization = () => {
         window.location.href = 'https://app2.kuickpay.com/PaymentsBillPayment';
       };
       
-
-     
       
     return (
         
