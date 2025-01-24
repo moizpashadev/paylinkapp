@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        
       },
       fontFamily: {
         outfit: ['Outfit', 'sans-serif'],
@@ -18,7 +19,11 @@ module.exports = {
         'custom-bg-header': '#E3EBF2',
         btnBlue: '#287DCE', // Replace with your desired color code
         customGreen: '#10B981',
-        customPulseColor: '#E3EBF2'
+        customPulseColor: '#E3EBF2',
+       
+          customBlue: '#FFFFFF',
+          customPurple: '#f7f9fb',
+        
          // Your custom color
       },
       screens: {

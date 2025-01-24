@@ -6,7 +6,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import InfoArea from '../components/InfoArea';
 import Textbox from '../components/textbox';
-import logo from '../components/Images/nestlelogo.avif';
+import logo from '../components/Images/kuickpay-logo.png';
 import CryptoJS from 'crypto-js';
 import SearchIcon from '../components/svgs/cardinfo/search.svg';
 import calendar from '../components/svgs/cardinfo/calendar.svg';
@@ -14,16 +14,17 @@ import calendar from '../components/svgs/cardinfo/calendar.svg';
 import card from '../components/svgs/cardinfo/cc.svg';
 
 import lock from '../components/svgs/cardinfo/Vector.svg';
-import { Caladea } from 'next/font/google';
 
 const CardInfo = () => {
   const router = useRouter();
-  const { encryptData } = require("../utils/encryptionUtils");
-  const { decryptData } = require("../utils/decryptUtils");
+    const [whiteLabledLogo, setwhiteLabledLogo] = useState(null);
+     const [logoLoader, setLogoLoader] = useState(true);
+     const { decryptData } = require('../utils/decryptUtils');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [cvv, setCvv] = useState('');
+  
   const [cardScheme, setCardScheme] = useState(null); // Store the card scheme (Visa, Mastercard, etc.)
   const cardLogos = {
     visa: '/visa-logo.png', // Add your Visa logo URL
@@ -130,7 +131,7 @@ const CardInfo = () => {
       };
   
   if (validateForm()) {
-sessionStorage.setItem("localstored", encryptData(formData));
+    sessionStorage.setItem("localstored", JSON.stringify(formData));
 
 const getSessionvalue = sessionStorage.getItem("localstored");
 
@@ -139,12 +140,47 @@ const getSessionvalue = sessionStorage.getItem("localstored");
   };
 
 
-  
+    useEffect(() => {
+      
+      const GetDatafromInquiry = sessionStorage.getItem('dataBus');
+      if (!GetDatafromInquiry) {
+        router.replace('/'); // Redirect to login if session data is missing
+        return;
+      } 
+      
+      if (GetDatafromInquiry) {
+          const decryptedData = decryptData(sessionStorage.getItem('dataBus'));
+          console.log(decryptedData);
+          if (decryptedData) {
+            
+            if(decryptedData.whitelabledLogo !== ""){
+             
+              setwhiteLabledLogo(decryptedData.whitelabledLogo);
+              setLogoLoader(false);
+            }
+            else{
+              setLogoLoader(false);
+            }
+             
+          }
+        }
+
+    });
+
+ const finalLogo =
+    whiteLabledLogo && whiteLabledLogo.trim() !== ''
+            ? whiteLabledLogo
+            : logo;
 
   return (
     <div className="p-1 flex flex-col min-h-screen z-10">
       
-      <Header Heading={'PAYMENT LINK'} logo={logo} />
+      <Header 
+                Heading="PAYMENT LINK" 
+                logo={finalLogo}
+                logoLoader={logoLoader}
+              />
+                    
 
       <div className="flex items-center justify-center pt-5 sm:ml-5 sm:mr-5">
         <InfoArea Text="Please Confirm with the bank if the card is enabled for online transactions." />

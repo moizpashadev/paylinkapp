@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'; // For navigation
 import Header from '../components/header';
 import Footer from '../components/footer';
-import logo from '../components/Images/nestlelogo.avif';
+import logo from '../components/Images/nestlelogo.jpg';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
@@ -145,7 +145,7 @@ const PaymentForm = () => {
               kuickpayID: response.data.response_Vouchernumber,
               authToken: authToken
           }),
-        'your-secret-key'  //process.env.SECRET_KEY // Use an environment variable for the secret key in production
+          '2FBC1A0D4B62EABEC9D6E35A9F0D47E967DDBF4A1EC98AC9A711EEB91856B6D4'  //'your-secret-key'  //process.env.SECRET_KEY // Use an environment variable for the secret key in production
       ).toString();
 
       router.push(`/inquiry?data=${encodeURIComponent(encryptedData)}`);
@@ -164,7 +164,8 @@ const PaymentForm = () => {
   
   return (
     <div className="p-1 flex flex-col min-h-screen z-10">
-      <Header Heading={'Nestlé Pure Life - Payments'} logo={logo} />
+      <Header Heading={'Nestlé Pure Life - Payments'} logo={logo} width={60} height={60} />
+      
 
       <main className="flex flex-col items-center justify-center pt-5 px-5 sm:ml-5 sm:mr-5">
         {/* Customer ID Input and Fetch Button */}

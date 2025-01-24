@@ -13,10 +13,12 @@ const InfoArea = ({Text}) => {
       </div> */}
 
       <div className="rounded-md  sm:p-1 sm:py-2  sm:ml-5 sm:mr-5 md:p-1 md:py-1 lg:p-1 lg:py-1 xsmsize:p-1 flex justify-center items-center">
-      <span className="relative flex ">
-        <span className="animate-ping absolute inline-flex w-8 h-8 rounded-full  bg-sky-300 opacity-75"></span>
+      <span className="relative flex">
+  <span className="animate-ping absolute inline-flex w-8 h-8 rounded-full bg-sky-300 opacity-75 
+      duration-500" // <-- Add duration-300 here
+        ></span>
         {/* <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span> */}
-        <Image src={InfoIcon} alt="My Icon" className="w-8 h-8 relative inline-flex rounded-full"  />
+        <Image src={InfoIcon} alt="My Icon" className="w-8 h-8 relative inline-flex rounded-full" />
       </span>
        
         <span className="ml-5 xsize:text-xs text-xs">

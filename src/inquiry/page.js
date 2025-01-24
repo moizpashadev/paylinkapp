@@ -13,7 +13,7 @@ import qrgen from '../components/Images/qrgen.png';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import PoweredByPFRaast from '../components/svgs/poweredby.svg';
-import logo from '../components/Images/nestlelogo.avif';
+import logo from '../components/Images/kuickpay-logo.png';
 
 
 const PaymentInitilization = () => {
@@ -35,7 +35,7 @@ const PaymentInitilization = () => {
         if (encryptedData) {
             try {
                 // Decrypt the data
-                const bytes = CryptoJS.AES.decrypt(encryptedData, 'your-secret-key'); // Use the same key
+                const bytes = CryptoJS.AES.decrypt(encryptedData, '2FBC1A0D4B62EABEC9D6E35A9F0D47E967DDBF4A1EC98AC9A711EEB91856B6D4'); // Use the same key
                 const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
                 setData(decryptedData);
                 
