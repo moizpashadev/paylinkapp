@@ -1,14 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Outfit } from 'next/font/google';
 import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: "./components/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  weight: "100 900",
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: "./components/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "100 900",
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],  // You can specify additional subsets if needed
+  weight: ['300', '400', '500', '700'],  // Specify the font weights you need
 });
 
 export const metadata = {
@@ -19,11 +27,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
+      <body className={outfit.className}>
+        {children}
+      </body>
+      {/* <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-      </body>
+      </body> */}
     </html>
   );
 }
